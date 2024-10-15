@@ -13,7 +13,7 @@ void main() {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoginView(title: 'Home',),
+      home: const LoginView(title: 'Login',),
     ),
   );
   runApp( MaterialApp(

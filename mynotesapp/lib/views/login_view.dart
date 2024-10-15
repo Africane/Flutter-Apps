@@ -77,6 +77,8 @@ class _LoginViewState extends State<LoginView> {
                     print('No user found for that email.');
                   } else if (e.code == 'wrong-password') {
                     print('Wrong password provided for that user.');
+                  } else if (e.code == 'invalid-email') {
+                    pragma('Invalid email');
                   }
                 }
               },
