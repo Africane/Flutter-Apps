@@ -1,12 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:mynotesapp/firebase_options.dart';
 
 
 // Register screen
 class RegisterView extends StatefulWidget {
-  const RegisterView({super.key});
+  const RegisterView({super.key, required String title});
 
   @override
   State<RegisterView> createState() => _RegisterViewState();
@@ -36,61 +34,57 @@ class _RegisterViewState extends State<RegisterView> {
       appBar: AppBar(
         title: const Text('Register'),
       ),
-      body: FutureBuilder(
-        future: Firebase.initializeApp(
-                 options: DefaultFirebaseOptions.currentPlatform,
+      body: Column(
+            children: [
+              TextField(
+                controller: _email,
+                enableSuggestions: false,
+                autocorrect: false,
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(
+                  hintText: 'Enter your email here',
                 ),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.done:
-              return Column(
-          children: [
-            TextField(
-              controller: _email,
-              enableSuggestions: false,
-              autocorrect: false,
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                hintText: 'Enter your email here',
               ),
-            ),
-            TextField(
-              controller: _password,
-              obscureText: true,
-              enableSuggestions: false,
-              autocorrect: false,
-              decoration: const InputDecoration(
-                hintText: 'Enter your password here',
+              TextField(
+                controller: _password,
+                obscureText: true,
+                enableSuggestions: false,
+                autocorrect: false,
+                decoration: const InputDecoration(
+                  hintText: 'Enter your password here',
+                ),
               ),
-            ),
-            TextButton(
-              onPressed: () async {
-                final email = _email.text;
-                final password = _password.text;
-                try {
-                  final UserCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                  email: email,
-                  password: password,
-                );
-                print(UserCredential);
-                } on FirebaseAuthException catch (e) {
-                  if (e.code == 'weak-password') {
-                    print('Weak password');
-                  } else if (e.code == 'email-already-in-use') {
-                    print('Email already in use');
+              TextButton(
+                onPressed: () async {
+                  final email = _email.text;
+                  final password = _password.text;
+                  try {
+                    final UserCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                    email: email,
+                    password: password,
+                  );
+                  print(UserCredential);
+                  } on FirebaseAuthException catch (e) {
+                    if (e.code == 'weak-password') {
+                      print('Weak password');
+                    } else if (e.code == 'email-already-in-use') {
+                      print('Email already in use');
+                    }
                   }
-                }
-              },
-            child: const Text('Register'),
-            ),
-          ],
-        );
-        default:
-        return const Text('Loading...');
-          }
-          
-        },
-      ),
+                },
+              child: const Text('Register'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/login/',
+                  (route) => false,
+                );
+                }, 
+                child: const Text('Already registered? Login here!'),
+              ),
+            ],
+          ),
     );
   }
 }
