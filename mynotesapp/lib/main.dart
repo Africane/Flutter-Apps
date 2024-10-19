@@ -47,7 +47,6 @@ class HomePage extends StatelessWidget {
             } else {
               return const LoginView(title: 'Login',);
             }
-            return const Text('Done');
             //i f (user!.emailVerified) {
             //  return const Text('Email is verified');
             //} else {
