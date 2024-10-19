@@ -20,6 +20,7 @@ void main() {
       routes: {
         '/login/': (context) => const LoginView(title: 'Login',),
          '/register/': (context) => const RegisterView(title: 'Register',),
+         '/notes/': (context) => const NotesView(), 
       },
     ),
   );
