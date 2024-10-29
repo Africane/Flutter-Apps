@@ -1,2 +1,2 @@
-This repository is a collection of flutter applications. They start simple and 
-increase in complexity ensuring my mastery in different flutter concepts.
+This is the default counter application in flutter. The idea is to make it a game. This is just to improve 
+my skills as a Flutter Developer.
