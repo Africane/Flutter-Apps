@@ -9,10 +9,22 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
+  final appbar = UiConstants.appBar();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UiConstants.appBar(),
+      appBar: appbar,
+      body: const SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Column(children: [
+            //textfield1
+            //textfield2
+            //button
+            //textspan
+          ],),
+        ),
+      ),
     );
   }
 }
